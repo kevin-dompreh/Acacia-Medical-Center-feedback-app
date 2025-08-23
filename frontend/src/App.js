@@ -1,17 +1,16 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import FeedbackPage from "./pages/FeedbackPage";
-import DashboardPage from "./pages/DashboardPage";
-import LoginPage from "./pages/LoginPage";
+import FeedbackForm from "./components/FeedbackForm";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 import "./styles.css";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<FeedbackPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/" element={<FeedbackForm />} />
+        <Route path="/admin" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
