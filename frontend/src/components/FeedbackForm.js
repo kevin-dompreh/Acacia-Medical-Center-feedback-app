@@ -82,9 +82,16 @@ function FeedbackForm() {
           required
         />
 
+
+        <label>Summary:</label>
+        <textarea
+          name="summary"
+          placeholder="Share your experience..."
+
         <label>Feedback:</label>
         <textarea
           name="summary"
+
           value={formData.summary}
           onChange={handleChange}
           placeholder="Give feedback"
