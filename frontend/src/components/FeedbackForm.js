@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles.css";
 
 function FeedbackForm() {
   const [formData, setFormData] = useState({
@@ -63,20 +64,13 @@ function FeedbackForm() {
           required
         />
 
-
         <label>Summary:</label>
         <textarea
           name="summary"
           placeholder="Share your experience..."
-
-        <label>Feedback:</label>
-        <textarea
-          name="summary"
-
           value={formData.summary}
           onChange={handleChange}
-          placeholder="Give feedback"
-        ></textarea>
+        />
 
         <button type="submit">Submit</button>
       </form>
