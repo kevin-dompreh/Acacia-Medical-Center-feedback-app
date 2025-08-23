@@ -1,6 +1,5 @@
-const Admin = require("../models/adminModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const db = require("../config/db");
+
 
 exports.register = (req, res) => {
   const { username, password } = req.body;
@@ -18,11 +17,16 @@ exports.register = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  const { username, password } = req.body;
 
-  Admin.findByUsername(username, (err, results) => {
+// Admin login
+const loginAdmin = (req, res) => {
+
+  const { username, password } = req.body;
+  const sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
+  db.query(sql, [username, password], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     if (results.length === 0)
+
       return res.json({ success: false, message: "User not found" });
 
     const admin = results[0];
@@ -38,5 +42,11 @@ exports.login = (req, res) => {
       );
       res.json({ success: true, token });
     });
+
+      return res.status(401).json({ error: "Invalid credentials" });
+    res.json({ admin: results[0] });
+
   });
 };
+
+module.exports = { loginAdmin };
