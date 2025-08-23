@@ -69,11 +69,11 @@ const FeedbackForm = () => {
           <option value="5">5 - Excellent</option>
         </select>
 
-        <label>Comments:</label>
+        <label>Summary:</label>
         <textarea
-          name="comments"
+          name="summary"
           placeholder="Share your experience..."
-          value={formData.comments}
+          value={formData.summary}
           onChange={handleChange}
           rows="4"
           required
