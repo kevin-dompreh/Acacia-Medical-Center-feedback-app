@@ -1,51 +1,78 @@
-.feedback-form-container {
-  max-width: 500px;
-  margin: 40px auto;
+.container,
+.admin-container,
+.dashboard-container {
+  width: 400px;
+  margin: 50px auto;
   padding: 20px;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  background: #f9f9f9;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.feedback-form h2 {
+h1 {
   text-align: center;
-  color: #1e3a8a; /* Blue */
-  margin-bottom: 20px;
+  color: #1e3a8a;
 }
 
-.feedback-form label {
+form label {
   display: block;
+  margin-top: 15px;
   font-weight: bold;
-  margin: 10px 0 5px;
-  color: #333;
+}
+form input,
+form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.feedback-form input,
-.feedback-form select,
-.feedback-form textarea {
+form button {
+  margin-top: 20px;
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
-
-.feedback-form textarea {
-  resize: none;
-}
-
-.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background: #f97316; /* Orange */
+  background-color: #f97316;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
 }
+form button:hover {
+  background-color: #ea580c;
+}
 
-.submit-btn:hover {
-  background: #ea580c;
+.admin-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.85rem;
+}
+.admin-link a {
+  color: #1e3a8a;
+  text-decoration: none;
+}
+.admin-link a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table,
+th,
+td {
+  border: 1px solid #ccc;
+}
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #1e3a8a;
+  color: white;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
