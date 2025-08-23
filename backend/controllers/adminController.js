@@ -1,27 +1,15 @@
-const Admin = require("../models/adminModel");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const db = require("../config/db");
 
-exports.login = (req, res) => {
+// Admin login
+const loginAdmin = (req, res) => {
   const { username, password } = req.body;
-
-  Admin.findByUsername(username, (err, results) => {
+  const sql = "SELECT * FROM admin WHERE username = ? AND password = ?";
+  db.query(sql, [username, password], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     if (results.length === 0)
-      return res.json({ success: false, message: "User not found" });
-
-    const admin = results[0];
-    bcrypt.compare(password, admin.password_hash, (err, isMatch) => {
-      if (err) throw err;
-      if (!isMatch)
-        return res.json({ success: false, message: "Invalid password" });
-
-      const token = jwt.sign(
-        { id: admin.id },
-        process.env.JWT_SECRET || "secret123",
-        { expiresIn: "1h" }
-      );
-      res.json({ success: true, token });
-    });
+      return res.status(401).json({ error: "Invalid credentials" });
+    res.json({ admin: results[0] });
   });
 };
+
+module.exports = { loginAdmin };
