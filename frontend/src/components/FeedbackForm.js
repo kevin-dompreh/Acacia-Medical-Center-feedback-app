@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles.css";
 
 function FeedbackForm() {
   const [formData, setFormData] = useState({
@@ -13,29 +14,10 @@ function FeedbackForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    fetch("http://localhost:5000/api/feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(data.message || "Feedback submitted");
-        setFormData({
-          name: "",
-          telephone: "",
-          department: "",
-          rating: "",
-          summary: "",
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Error submitting feedback");
-      });
+    console.log(formData);
+    // later: send to backend API
   };
 
   return (
@@ -82,20 +64,13 @@ function FeedbackForm() {
           required
         />
 
-
         <label>Summary:</label>
         <textarea
           name="summary"
           placeholder="Share your experience..."
-
-        <label>Feedback:</label>
-        <textarea
-          name="summary"
-
           value={formData.summary}
           onChange={handleChange}
-          placeholder="Give feedback"
-        ></textarea>
+        />
 
         <button type="submit">Submit</button>
       </form>
