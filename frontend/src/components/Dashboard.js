@@ -21,7 +21,7 @@ function Dashboard() {
   // Logout function
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login"); // redirect to login page
+    navigate("/admin"); // redirect to login page
   };
 
   return (
@@ -34,11 +34,25 @@ function Dashboard() {
           alignItems: "center",
         }}
       >
-        <h2>Admin Dashboard</h2>
+        <h2 style={{ color: "blue" }}>Admin Dashboard</h2>
+        <button
+          onClick={() => navigate("/register-admin")}
+          className="btn"
+          style={{
+            background: "#f97316",
+            color: "white",
+            border: "none",
+            padding: "8px 12px",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Register Admin
+        </button>
         <button
           onClick={handleLogout}
           style={{
-            background: "orange",
+            background: "#f97316",
             color: "white",
             border: "none",
             padding: "8px 12px",

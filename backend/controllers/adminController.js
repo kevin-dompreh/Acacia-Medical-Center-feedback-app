@@ -39,11 +39,11 @@ exports.login = (req, res) => {
       }
 
       const token = jwt.sign(
-        { id: admin.id },
+        { id: admin.id, username: admin.username },
         process.env.JWT_SECRET || "secret123",
         { expiresIn: "1h" }
       );
-      res.json({ success: true, token });
+      res.json({ success: true, token, username: admin.username });
     });
   });
 };
