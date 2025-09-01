@@ -6,7 +6,12 @@ function LoginPage({ onLoginSuccess }) {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5000/api/admin/login", {
+    // fetch("http://localhost:5000/api/admin/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ username, password }),
+    // })
+    fetch(`${process.env.REACT_APP_API_URL}/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
