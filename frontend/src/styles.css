@@ -1,10 +1,10 @@
 .container,
 .admin-container,
 .dashboard-container {
-  width: 400px;
+  width: 420px;
   margin: 50px auto;
   padding: 20px;
-  border: 1px solid #ccc;
+  border: 1px solid #161514ee;
   border-radius: 10px;
 }
 
@@ -14,12 +14,14 @@ h1 {
 }
 
 form label {
+  color: #1e3a8a;
   display: block;
   margin-top: 15px;
   font-weight: bold;
 }
 form input,
-form textarea {
+form textarea,
+form select {
   width: 100%;
   padding: 8px;
   margin-top: 5px;

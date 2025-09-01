@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
-function FeedbackForm() {
+import "../styles.css";
+const FeedbackForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     telephone: "",
@@ -10,20 +10,27 @@ function FeedbackForm() {
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/api/feedback", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(data.message || "Feedback submitted");
+    try {
+      const response = await fetch("http://localhost:5000/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("✅ Feedback submitted successfully!");
         setFormData({
           name: "",
           telephone: "",
@@ -31,73 +38,74 @@ function FeedbackForm() {
           rating: "",
           summary: "",
         });
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Error submitting feedback");
-      });
+      } else {
+        alert("❌ Error submitting feedback. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("⚠️ Could not connect to server.");
+    }
   };
 
   return (
     <div className="container">
-      <h1>Acacia Feedback App</h1>
+      <h2>Acacia Feedback Form</h2>
       <form onSubmit={handleSubmit}>
         <label>Name:</label>
         <input
+          type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Name"
           required
         />
 
         <label>Telephone:</label>
         <input
-          type="tel"
+          type="text"
           name="telephone"
           value={formData.telephone}
           onChange={handleChange}
-          placeholder="Telephone"
-          required
         />
 
-        <label>Department Visited:</label>
+        <label>Department:</label>
         <input
           type="text"
           name="department"
           value={formData.department}
           onChange={handleChange}
-          placeholder="Department Visited"
           required
         />
 
         <label>Rating (1-5):</label>
-        <input
+        <select
           name="rating"
-          type="number"
-          min="1"
-          max="5"
           value={formData.rating}
           onChange={handleChange}
           required
-        />
+        >
+          <option value="">-- Select Rating --</option>
+          <option value="1">Very poor</option>
+          <option value="2">Poor</option>
+          <option value="3">Average</option>
+          <option value="4">Good</option>
+          <option value="5">Excellent</option>
+        </select>
 
-        <label>Feedback:</label>
+        <label>Summary:</label>
         <textarea
           name="summary"
           value={formData.summary}
           onChange={handleChange}
-          placeholder="Give feedback"
-        ></textarea>
+        />
 
-        <button type="submit">Submit</button>
+        <button type="submit">Submit Feedback</button>
       </form>
-
       <p className="admin-link">
         <a href="/admin">Admin Login</a>
       </p>
     </div>
   );
-}
+};
 
 export default FeedbackForm;
