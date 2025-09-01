@@ -54,15 +54,16 @@ function FeedbackForm() {
         />
 
         <label>Rating (1-5):</label>
-        <input
-          name="rating"
-          type="number"
-          min="1"
-          max="5"
+        <select id="rating" name="rating">
+          <option value="1.Very poor">Very poor</option>
+          <option value="2. Poor">Poor</option>
+          <option value="3. Average">Average</option>
+          <option value="4. Good">Good</option>
+          <option value="5. Excellent">Excellent</option>
           value={formData.rating}
           onChange={handleChange}
           required
-        />
+        </select>
 
         <label>Summary:</label>
         <textarea
